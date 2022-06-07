@@ -13,7 +13,7 @@ namespace P4_MVVM.ViewModel
 {
     public partial class BaseModel : INotifyPropertyChanged
     {
-
+        public MusicContext context = new MusicContext();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

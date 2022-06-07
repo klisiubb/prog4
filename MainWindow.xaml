@@ -37,14 +37,14 @@
             <Button Command="{Binding artistViewCommand}" Content="Manage:" Style="{StaticResource leftNormalButton}"/>
 
             <Label Content="Songs:" Style="{StaticResource leftLabel}"/>
-            <Button Content="Manage:" Style="{StaticResource leftNormalButton}"/>
+            <Button Content="Manage:" Command="{Binding songViewCommand}" Style="{StaticResource leftNormalButton}"/>
 
-            <Label Content="Albums:" Style="{StaticResource leftLabel}"/>
-            <Button Content="Manage" Style="{StaticResource leftNormalButton}"/>
+            <Label Content="Albums:"  Style="{StaticResource leftLabel}"/>
+            <Button Content="Manage" Command="{Binding albumViewCommand}"  Style="{StaticResource leftNormalButton}"/>
 
             <Label Content="Other:" Style="{StaticResource leftLabel}" />
             <Button Content="Listen" Style="{StaticResource leftNormalButton}"/>
-            <Button Content="Home" Command="{Binding albumViewCommand}" Style="{StaticResource leftNormalButton}"/>
+            <Button Content="Home" Command="{Binding homeViewCommand}" Style="{StaticResource leftNormalButton}"/>
         </StackPanel>
 
         <ContentControl Grid.Column="1" Grid.RowSpan="2" Margin="10" Content="{Binding currentView}">

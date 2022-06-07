@@ -11,20 +11,35 @@ using System.Threading.Tasks;
 
 namespace P4_MVVM.ViewModel
 {
-    public partial class MainViewModel : BaseModel
+    public class MainViewModel : BaseModel
     {
 
         public RelayCommand artistViewCommand
         {
             get { return new RelayCommand(artistViewSet); }
         }
-        public RelayCommand songViewCommand { get; set; }
 
         public RelayCommand albumViewCommand
         {
             get
             {
                 return new RelayCommand(albumViewSet);
+            }
+        }
+
+        public RelayCommand homeViewCommand
+        {
+            get
+            {
+                return new RelayCommand(homeViewSet);
+            }
+        }
+
+        public RelayCommand songViewCommand
+        {
+            get
+            {
+                return new RelayCommand(songViewSet);
             }
         }
 
@@ -40,20 +55,29 @@ namespace P4_MVVM.ViewModel
             }
         }
 
-        private void albumViewSet()
+        public void albumViewSet()
         {
             currentView = new AlbumModel();
         }
 
-        private void artistViewSet()
+        public void artistViewSet()
         {
             currentView = new ArtistModel();
         }
 
+        public void homeViewSet()
+        {
+            currentView = new HomeModel();
+        }
+
+        public void songViewSet()
+        {
+            currentView = new SongModel();
+        }
         public MainViewModel()
         {
 
-            currentView =  new ArtistModel();
+            currentView =  new HomeModel();
 
         }
 

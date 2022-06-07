@@ -16,10 +16,10 @@ namespace P4_MVVM.Model
         public int AlbumID { get; set; }
 
         [Required]
-        public string AlbumTitle { get; set; } 
+        public string AlbumTitle { get; set; }
 
         [Required]
-        public DateTime RelaseDate { get; set; }
+        public string RelaseDate { get; set; }
 
         [Required]
         public string CoverArtLink { get; set; }

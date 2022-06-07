@@ -8,6 +8,91 @@
              d:DesignHeight="750" d:DesignWidth="1000">
     <Grid>
 
-        <Label HorizontalAlignment="Center" VerticalAlignment="Center">YOLO</Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox Name="albumCombo"
+         ItemsSource="{Binding Albums, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Grid.Row="1">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=AlbumID}"/>
+                        <TextBlock Text=" - "/>
+                        <TextBlock Text="{Binding Path=AlbumTitle}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <!-- Sekcja Check Albums -->
+        <Label Content="Check albums:" Style="{StaticResource bigLabel}" Grid.Column="0" />
+        <Label Content="Select album to view/modify" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="1" />
+
+        <StackPanel Grid.Row="2" Grid.RowSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Source="{Binding ElementName=albumCombo,Path=SelectedItem.CoverArtLink}"/>
+            <Label Style="{StaticResource smallLabel}" Content="{Binding ElementName=albumCombo,Path=SelectedItem.AlbumTitle}"/>
+        </StackPanel>
+
+        <Label Content="Relase date:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="4" />
+        <TextBlock Margin="15 50 0 0" FontSize="14" Grid.Row="4" Text="{Binding ElementName=albumCombo,Path=SelectedItem.RelaseDate}"/>
+
+        <Label Content="Author:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="5" />
+        <TextBlock Margin="15 50 0 0" FontSize="14" Grid.Row="5" Text="{Binding ElementName=albumCombo,Path=SelectedItem.ArtistID}"/>
+
+
+        <!-- Sekcja Manage Albums -->
+        <Label Content="Manage artists:" Style="{StaticResource bigLabel}" Grid.Column="1" />
+
+        <Label Content="Album title:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="1"/>
+        <TextBox Text="{Binding ElementName=albumCombo,Path=SelectedItem.AlbumTitle,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" />
+
+        <Label Content="Relase date:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="2"/>
+        <TextBox Text="{Binding ElementName=albumCombo,Path=SelectedItem.RelaseDate,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2"/>
+
+        <Label Content="Cover Art Link:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="3"/>
+        <TextBox Text="{Binding ElementName=albumCombo,Path=SelectedItem.CoverArtLink,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"/>
+
+        <Label Content="Artist ID:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="4"/>
+        <TextBox Text="{Binding ElementName=albumCombo,Path=SelectedItem.ArtistID,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4"/>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5" Grid.RowSpan="2">
+            <Button  Content="Update" CommandParameter="{Binding ElementName=albumCombo,Path=SelectedItem,UpdateSourceTrigger=PropertyChanged}" Command="{Binding updateAlbumCommand}" Style="{StaticResource modifyButton}"  />
+            <Label/>
+            <Button  Content="Delete" CommandParameter="{Binding ElementName=albumCombo,Path=SelectedItem,UpdateSourceTrigger=PropertyChanged}" Command="{Binding deleteAlbumCommand}" Style="{StaticResource removeButton}" />
+        </StackPanel>
+
+        <!-- Sekcja Add Albums -->
+
+
+        <Label Content="Add new albums:" Style="{StaticResource bigLabel}" Grid.Column="2" />
+
+        <Label Content="Album title:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="1"/>
+        <TextBox Text="{Binding AlbumTitle, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="2" Grid.Row="1" />
+
+        <Label Content="Relase Date:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="2"/>
+        <TextBox Text="{Binding RelaseDate, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="2" Grid.Row="2"/>
+
+        <Label Content="Cover Art Link:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="3"/>
+        <TextBox Text="{Binding CoverArtLink, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="2" Grid.Row="3"/>
+
+        <Label Content="ArtistID:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="4"/>
+        <TextBox Text="{Binding ArtistID, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="4"/>
+
+        <Button  Content="Submit" Command="{Binding addAlbumCommand}" Style="{StaticResource addButton}" Grid.Column="2" Grid.Row="5" Grid.RowSpan="2"/>
+
     </Grid>
 </UserControl>

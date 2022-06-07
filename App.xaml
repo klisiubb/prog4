@@ -16,9 +16,16 @@
             <DataTemplate DataType="{x:Type viewModel:AlbumModel}">
 
                 <view:Main/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:HomeModel}">
 
+                <view:Home/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:SongModel}">
+
+                <view:Song/>
+            </DataTemplate>
 
             <Style TargetType="{x:Type Image}">
                 <Setter Property="Width" Value="128"/>

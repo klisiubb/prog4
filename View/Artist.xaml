@@ -37,24 +37,23 @@
         </ComboBox>
 
 
-
-
-
-
         <!-- Sekcja Check Artist -->
         <Label Content="Check artists:" Style="{StaticResource bigLabel}" Grid.Column="0" />
         <Label Content="Select an artist to view/modify:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="1" />
 
-
-
-        <Label Content="Short description:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="2" />
-
-        <TextBlock Grid.Row="2" Text="{Binding ElementName=artistCombo,Path=SelectedItem.ShortDescription}"/>
-
-        <StackPanel Grid.Row="3" Grid.RowSpan="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.RowSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Image Source="{Binding ElementName=artistCombo,Path=SelectedItem.ArtistPhotoLink}"/>
             <Label Style="{StaticResource smallLabel}" Content="{Binding ElementName=artistCombo,Path=SelectedItem.ArtistName}"/>
         </StackPanel>
+
+        <Label Content="Country of orgin:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="4" />
+        <TextBlock Margin="15 50 0 0" FontSize="14" Grid.Row="4" Text="{Binding ElementName=artistCombo,Path=SelectedItem.CountryOfOrgin}"/>
+
+        <Label Content="Short description:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="5" />
+        <TextBlock Margin="15 50 0 0" FontSize="14" Grid.Row="5" Text="{Binding ElementName=artistCombo,Path=SelectedItem.ShortDescription}"/>
+
+        <Label Content="Genre:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="6" />
+        <TextBlock Margin="15 50 0 0" FontSize="14" Grid.Row="6" Text="{Binding ElementName=artistCombo,Path=SelectedItem.Genre}"/>
 
 
         <!-- Sekcja Manage Artist -->

@@ -26,9 +26,6 @@ namespace P4_MVVM.ViewModel
             addArtistCommand = new RelayCommand(addArtist);
         }
 
-
-        private MusicContext context = new MusicContext();
-
         private int _artistID;
         public int ArtistID { get => _artistID; }
 
@@ -42,7 +39,6 @@ namespace P4_MVVM.ViewModel
                 onPropertyChanged(nameof(_artistName));
             }
         }
-
 
         private string _shortDescription;
         public string ShortDescription
@@ -88,13 +84,10 @@ namespace P4_MVVM.ViewModel
             }
         }
 
-
-
         private void addArtist()
         {
             if (!string.IsNullOrEmpty(ArtistName) && !string.IsNullOrEmpty(ShortDescription) && !string.IsNullOrEmpty(CountryOfOrgin) && !string.IsNullOrEmpty(ArtistPhotoLink)&& !string.IsNullOrEmpty(Genre))
             {
-
                 var artist = new Artist()
                 {
                     ArtistName = _artistName,
@@ -127,6 +120,8 @@ namespace P4_MVVM.ViewModel
             Artist artist = context.Artists.Where(x => x.ArtistID==param.ArtistID).FirstOrDefault();
             context.Artists.Remove(artist);
             context.SaveChanges();
+
+            MessageBox.Show("Artist deleted.", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
         private void updateArtist(Artist param)
