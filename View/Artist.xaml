@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="P4_MVVM.View.Artist"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:P4_MVVM.View" xmlns:viewmodel="clr-namespace:P4_MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ArtistModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox Name="artistCombo"
+         ItemsSource="{Binding Artists, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Grid.Row="1">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=ArtistID}"/>
+                        <TextBlock Text=" - "/>
+                        <TextBlock Text="{Binding Path=ArtistName}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+
+
+
+
+
+        <!-- Sekcja Check Artist -->
+        <Label Content="Check artists:" Style="{StaticResource bigLabel}" Grid.Column="0" />
+        <Label Content="Select an artist to view/modify:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="1" />
+
+
+
+        <Label Content="Short description:" Style="{StaticResource smallLabel}" Grid.Column="0" Grid.Row="2" />
+
+        <TextBlock Grid.Row="2" Text="{Binding ElementName=artistCombo,Path=SelectedItem.ShortDescription}"/>
+
+        <StackPanel Grid.Row="3" Grid.RowSpan="2" Orientation="Horizontal">
+            <Image Source="{Binding ElementName=artistCombo,Path=SelectedItem.ArtistPhotoLink}"/>
+            <Label Style="{StaticResource smallLabel}" Content="{Binding ElementName=artistCombo,Path=SelectedItem.ArtistName}"/>
+        </StackPanel>
+
+
+        <!-- Sekcja Manage Artist -->
+        <Label Content="Manage artists:" Style="{StaticResource bigLabel}" Grid.Column="1" />
+
+        <Label Content="Artist name:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="1"/>
+        <TextBox Text="{Binding ElementName=artistCombo,Path=SelectedItem.ArtistName,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" />
+
+        <Label Content="Short description:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="2"/>
+        <TextBox Text="{Binding ElementName=artistCombo,Path=SelectedItem.ShortDescription,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2"/>
+
+        <Label Content="Country of orgin:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="3"/>
+        <TextBox Text="{Binding ElementName=artistCombo,Path=SelectedItem.CountryOfOrgin,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"/>
+
+        <Label Content="Artist photo link:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="4"/>
+        <TextBox Text="{Binding ElementName=artistCombo,Path=SelectedItem.ArtistPhotoLink,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4"/>
+
+        <Label Content="Genre:" Style="{StaticResource smallLabel}" Grid.Column="1" Grid.Row="5"/>
+        <TextBox Text="{Binding ElementName=artistCombo,Path=SelectedItem.Genre,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6" Grid.RowSpan="2">
+            <Button  Content="Update" CommandParameter="{Binding ElementName=artistCombo,Path=SelectedItem,UpdateSourceTrigger=PropertyChanged}" Command="{Binding updateArtistCommand}" Style="{StaticResource modifyButton}"  />
+            <Label/>
+            <Button  Content="Delete" CommandParameter="{Binding ElementName=artistCombo,Path=SelectedItem,UpdateSourceTrigger=PropertyChanged}" Command="{Binding deleteArtistCommand}" Style="{StaticResource removeButton}" />
+        </StackPanel>
+
+        <!-- Sekcja Add Artist -->
+        <Label Content="Add new artists:" Style="{StaticResource bigLabel}" Grid.Column="2" />
+
+        <Label Content="Artist name:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="1"/>
+        <TextBox Text="{Binding ArtistName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="2" Grid.Row="1" />
+
+        <Label Content="Short description:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="2"/>
+        <TextBox Text="{Binding ShortDescription, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="2" Grid.Row="2"/>
+
+        <Label Content="Country of orgin:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="3"/>
+        <TextBox Text="{Binding CountryOfOrgin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="2" Grid.Row="3"/>
+
+        <Label Content="Artist photo link:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="4"/>
+        <TextBox Text="{Binding ArtistPhotoLink, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="4"/>
+
+        <Label Content="Genre:" Style="{StaticResource smallLabel}" Grid.Column="2" Grid.Row="5"/>
+        <TextBox Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="2" Grid.Row="5"/>
+
+        <Button  Content="Submit" Command="{Binding addArtistCommand}" Style="{StaticResource addButton}" Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"/>
+
+    </Grid>
+
+</UserControl>
